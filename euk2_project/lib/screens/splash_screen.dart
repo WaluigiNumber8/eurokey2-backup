@@ -9,6 +9,7 @@ class EUKSplashScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final double screenHeight = MediaQuery.of(context).size.height;
+    int taps = 0;
 
     return Scaffold(
       body: Center(
@@ -17,10 +18,12 @@ class EUKSplashScreen extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              if (MediaQuery.of(context).size.height > 310)
-                Image.asset('assets/images/logo_key.png', height: screenHeight * 0.25,),
+              if (MediaQuery.of(context).size.height > 310) const SplashImage(),
               SizedBox(height: screenHeight * 0.02),
-              const Text('EuroKlíčenka', textScaleFactor: 2,),
+              const Text(
+                'EuroKlíčenka',
+                textScaleFactor: 2,
+              ),
               SizedBox(height: screenHeight * 0.1),
               const CircularProgressIndicator(),
               const SizedBox(height: 16),
@@ -41,6 +44,39 @@ class EUKSplashScreen extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+}
+
+
+///The image used for teh Splash Screen.
+class SplashImage extends StatefulWidget {
+  const SplashImage({super.key});
+
+  @override
+  State<SplashImage> createState() => _SplashImageState();
+}
+
+class _SplashImageState extends State<SplashImage> {
+  int _taps = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    _taps = 0;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        setState(() {
+          if (_taps <=3 )_taps++;
+        });
+      },
+      child: (_taps > 3)
+          ? Image.asset('assets/images/logo_key_alt.png', height: MediaQuery.of(context).size.height * 0.25)
+          : Image.asset('assets/images/logo_key.png', height: MediaQuery.of(context).size.height * 0.25),
     );
   }
 }
