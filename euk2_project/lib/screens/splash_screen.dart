@@ -20,10 +20,7 @@ class EUKSplashScreen extends StatelessWidget {
             children: <Widget>[
               if (MediaQuery.of(context).size.height > 310) const SplashImage(),
               SizedBox(height: screenHeight * 0.02),
-              const Text(
-                'EuroKlíčenka',
-                textScaleFactor: 2,
-              ),
+              const Text('EuroKlíčenka', textScaleFactor: 2),
               SizedBox(height: screenHeight * 0.1),
               const CircularProgressIndicator(),
               const SizedBox(height: 16),
